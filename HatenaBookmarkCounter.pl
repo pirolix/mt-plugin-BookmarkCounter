@@ -23,6 +23,19 @@ HTMLHEREDOC
     $$tmpl =~ s!($old)!$1$new!;
 });
 
-1;
-__END__
+### for MT4/MT5
+MT->add_callback ('MT::App::CMS::template_source.blog_stats_entry', 5, $plugin, sub {
+    my ($eh, $app, $tmpl) = @_;
 
+    my $old = <<'HTMLHEREDOC';
+<h4><MTIf name="editable"><a href="<$mt:var name="script_url"$>?__mode=view&amp;_type=entry&amp;id=<$MTEntryID$>&amp;blog_id=<$MTBlogID$>"><MTGetVar name="entry_title"></a><MTElse name="author_id" eq="$entry_author_id"><a href="<$mt:var name="script_url"$>?__mode=view&amp;_type=entry&amp;id=<$MTEntryID$>&amp;blog_id=<$MTBlogID$>"><MTGetVar name="entry_title"></a><MTElse><MTGetVar name="entry_title"></MTIf>
+HTMLHEREDOC
+    chomp $old;
+    $old = quotemeta ($old);
+    my $new = <<'HTMLHEREDOC';
+&nbsp;<a href="http://b.hatena.ne.jp/entry/<$MTEntryPermalink$>"><img src="http://b.hatena.ne.jp/entry/image/<$MTEntryPermalink$>" /></a>
+HTMLHEREDOC
+    $$tmpl =~ s!($old)!$1$new!;
+});
+
+1;
