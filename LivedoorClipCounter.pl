@@ -1,5 +1,5 @@
-package MT::Plugin::SKR::LivedoorClipCounter;
-# @see 
+package MT::Plugin::OMV::LivedoorClipCounter;
+# @see http://www.magicvox.net/archive/2010/01262245/
 
 use strict;
 use MT 4;

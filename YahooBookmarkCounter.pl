@@ -1,5 +1,5 @@
-package MT::Plugin::SKR::YahooBookmarkCounter;
-# @see 
+package MT::Plugin::OMV::YahooBookmarkCounter;
+# @see http://www.magicvox.net/archive/2010/01262245/
 
 use strict;
 use MT 4;
