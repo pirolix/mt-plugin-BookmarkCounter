@@ -38,4 +38,19 @@ HTMLHEREDOC
     $$tmpl =~ s!($old)!$1$new!;
 });
 
+### for MT4
+MT->add_callback ('MT::App::CMS::template_source.edit_entry', 5, $plugin, sub {
+    my ($eh, $app, $tmpl) = @_;
+
+    my $target = qq!<ul id="bookmarks-list">!;
+
+    $$tmpl =~ /\Q$target\E/
+        or return; # do nothing
+
+    my $new = << 'HTMLHEREDOC';
+<li>livedoor Clip - <a href="http://clip.livedoor.com/page/<$mt:var name="entry_permalink"$>"><img src="http://image.clip.livedoor.com/counter/<$mt:var name="entry_permalink"$>" /></a></li>
+HTMLHEREDOC
+    $$tmpl =~ s/(\Q$target\E)/$1$new/;
+});
+
 1;
