@@ -1,4 +1,5 @@
-package MT::Plugin::OMV::LivedoorClipCounter;
+package MT::Plugin::OMV::BookmarkCounter::LivedoorClip;
+# $Id$
 # @see http://www.magicvox.net/archive/2010/01262245/
 
 use strict;

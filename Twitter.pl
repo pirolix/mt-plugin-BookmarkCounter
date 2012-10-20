@@ -1,4 +1,5 @@
-package MT::Plugin::OMV::YahooBookmarkCounter;
+package MT::Plugin::OMV::BookmarkCounter::Twitter;
+# $Id$
 # @see http://www.magicvox.net/archive/2010/01262245/
 
 use strict;
@@ -18,7 +19,8 @@ MT->add_callback ('MT::App::CMS::template_source.entry_table', 5, $plugin, sub {
 <a href="<$mt:var name="entry_permalink"$>" target="<__trans phrase="_external_link_target">" title="<mt:if name="object_type" eq="entry"><__trans phrase="View entry"><mt:else><__trans phrase="View page"></mt:if>"><img src="<$mt:var name="static_uri"$>images/spacer.gif" alt="<mt:if name="object_type" eq="entry"><__trans phrase="View entry"><mt:else><__trans phrase="View page"></mt:if>" width="13" height="9" /></a>
 HTMLHEREDOC
     my $new = <<'HTMLHEREDOC';
-<br /><a href="http://bookmarks.yahoo.co.jp/url?url=<$mt:var name="entry_permalink"$>"><img src="http://num.bookmarks.yahoo.co.jp/image/small/<$mt:var name="entry_permalink"$>" /></a>
+<br /><a href="http://tweetbuzz.jp/redirect?url=<$mt:var name="entry_permalink" encode_url="1"$>" title="Twitter‚Å‚Ì”½‰ž"><!--
+--><img src="http://tools.tweetbuzz.jp/imgcount?url=<$mt:var name="entry_permalink" encode_url="1"$>" alt="Twitter‚Å‚Ì”½‰ž" /></a></li>
 HTMLHEREDOC
     $$tmpl =~ s!($old)!$1$new!;
 });
@@ -33,7 +35,7 @@ HTMLHEREDOC
     chomp $old;
     $old = quotemeta ($old);
     my $new = <<'HTMLHEREDOC';
-&nbsp;<a href="http://bookmarks.yahoo.co.jp/url?url=<$MTEntryPermalink$>"><img src="http://num.bookmarks.yahoo.co.jp/image/small/<$MTEntryPermalink$>" /></a>
+&nbsp;<a href="http://tweetbuzz.jp/redirect?url=<$MTEntryPermalink encode_url="1"$>"><img src="http://tools.tweetbuzz.jp/imgcount?url=<$MTEntryPermalink encode_url="1"$>" /></a>
 HTMLHEREDOC
     $$tmpl =~ s!($old)!$1$new!;
 });
@@ -48,7 +50,9 @@ MT->add_callback ('MT::App::CMS::template_source.edit_entry', 5, $plugin, sub {
         or return; # do nothing
 
     my $new = << 'HTMLHEREDOC';
-<li>Yahoo! Bookmark - <a href="http://bookmarks.yahoo.co.jp/url?url=<$mt:var name="entry_permalink"$>"><img src="http://num.bookmarks.yahoo.co.jp/image/small/<$mt:var name="entry_permalink"$>" /></a></li>
+<li>Twitter - 
+<a href="http://tweetbuzz.jp/redirect?url=<$mt:var name="entry_permalink" encode_url="1"$>" title="Twitter‚Å‚Ì”½‰ž"><!--
+--><img src="http://tools.tweetbuzz.jp/imgcount?url=<$mt:var name="entry_permalink" encode_url="1"$>" alt="Twitter‚Å‚Ì”½‰ž" /></a></li>
 HTMLHEREDOC
     $$tmpl =~ s/(\Q$target\E)/$1$new/;
 });

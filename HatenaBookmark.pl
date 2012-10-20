@@ -1,4 +1,4 @@
-package MT::Plugin::OMV::HatenaBookmarkCounter;
+package MT::Plugin::OMV::BookmarkCounter::HatenaBookmark;
 # @see http://www.magicvox.net/archive/2010/01262245/
 
 use strict;
